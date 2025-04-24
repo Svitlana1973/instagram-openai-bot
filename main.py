@@ -46,7 +46,16 @@ def send_instagram_message(recipient_id, message_text):
         "recipient": {"id": recipient_id},
         "message": {"text": message_text}
     }
-    requests.post(url, headers=headers, json=payload)
+
+    print("👉 Отправляю сообщение:")
+    print("URL:", url)
+    print("Payload:", payload)
+
+    try:
+        response = requests.post(url, headers=headers, json=payload)
+        print("📩 Ответ от Facebook:", response.status_code, response.text)
+    except Exception as e:
+        print("❌ Ошибка при отправке:", e)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
